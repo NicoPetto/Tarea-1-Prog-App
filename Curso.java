@@ -5,15 +5,13 @@
 package logica;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,31 +19,31 @@ import javax.persistence.Table;
  * @author elizeth
  */
 @Entity
-@Table(name = "institutos")
-public class Instituto implements Serializable {
+@Table(name = "cursos")
+public class Curso implements Serializable {
 
     private static final long serialVersionUID = 1L;
-   @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    
     @Column(unique = true, nullable = false)
-    private String nombre; // Único en el sistema
+    private String nombre; // Único
 
-    // Relación con Cursos (Un instituto brinda varios cursos)
-    @OneToMany(mappedBy = "instituto", cascade = CascadeType.ALL)
-    private List<Curso> cursos = new ArrayList<>();
+    private String descripcion;
+    private String duracion;
+    private int cantidadHoras;
+    private int creditos;
+    private String url;
 
-    public Instituto() {}
+    @ManyToMany(mappedBy = "cursos")
+    private List<ProgramaFormacion> programas;
 
-    public Instituto(String nombre) {
-        this.nombre = nombre;
-    }
+    public Curso() {}
 
     // Getters y Setters
     public Long getId() { return id; }
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
-    public List<Curso> getCursos() { return cursos; }
-    public void setCursos(List<Curso> cursos) { this.cursos = cursos; }
+    
 }
