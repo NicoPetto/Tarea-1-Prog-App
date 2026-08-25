@@ -2,119 +2,48 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Logica;
+package logica;
+
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 /**
  *
- * @author Nicolás
+ * @author elizeth
  */
-
 @Entity
+@Table(name = "cursos")
 public class Curso implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     @Id
-    private String nombre;
-    private String url;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    
+    @Column(unique = true, nullable = false)
+    private String nombre; // Único
+
     private String descripcion;
-    private int cantCreditos;
-    private int cantHoras;
-    private int duracion;
-    private Date fechaRegistro;
-    private Date fechaInstancia;
-    
-    public Curso(){
-        
-    }
-    
-    public Curso(String n,
-                 String url,
-                 String desc,
-                 int cred,
-                 int horas,
-                 int dur,
-                 Date fechaReg,
-                 Date fechaInst){
-        
-        this.nombre = n;
-        this.url = url;
-        this.descripcion = desc;
-        this.cantCreditos = cred;
-        this.cantHoras = horas;
-        this.duracion = dur;
-        this.fechaRegistro = fechaReg;
-        this.fechaInstancia = fechaInst;
-                
-    }
-    
-    public String getNombre(){
-        return nombre;
-    }
-    
-    public void setNombre(String n){
-        this.nombre = n;
-    }
-    
-    public String getUrl(){
-        return url;
-    }
-    
-    public void setUrl(String url){
-        this.url = url;
-    }
-    
-    public String getDescripcion(){
-        return descripcion;
-    }
-    
-    public void setDescripcion(String desc){
-        this.descripcion = desc;
-    }
-    
-    public int getCantCreditos(){
-        return cantCreditos;
-    }
-    
-    public void setCantCreditos(int cantC){
-        this.cantCreditos = cantC;
-    }
-    
-    public int getCantHoras(){
-        return cantHoras;
-    }
-    
-    public void setCantHoras(int cantH){
-        this.cantHoras = cantH;
-    }
-    
-    public int getDuracion(){
-        return duracion;
-    }
-    
-    public void setDuracion(int d){
-        this.duracion = d;
-    }
-    
-    public Date getFechaRegistro(){
-        return fechaRegistro;
-    }
-    
-    public void setFechaRegistro(Date fr){
-        this.fechaRegistro = fr;
-    }
-    
-    public Date getFechaInstancia(){
-        return fechaInstancia;
-    }
-    
-    public void setFechaInstancia(Date fi){
-        this.fechaInstancia = fi;
-    }
-   
-    
+    private String duracion;
+    private int cantidadHoras;
+    private int creditos;
+    private String url;
+
+    @ManyToMany(mappedBy = "cursos")
+    private List<ProgramaFormacion> programas;
+
+    public Curso() {}
+
+    // Getters y Setters
+    public Long getId() { return id; }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
     
 }
