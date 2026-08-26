@@ -19,15 +19,9 @@ import persistencia.ControladorPersistencia;
 
 public class AgregarCursoAProgramaInternalFrame extends javax.swing.JInternalFrame {
 
-    
-    public AgregarCursoAProgramaInternalFrame() {
-        initComponents();
-    }
-
     private JComboBox<String> cbProgramas;
     private JComboBox<String> cbCursos;
-    private JButton btnAceptar;
-    private JButton btnCancelar;
+   
     
     private ControladorPersistencia controlPersistencia;
 
@@ -56,17 +50,17 @@ public class AgregarCursoAProgramaInternalFrame extends javax.swing.JInternalFra
         cbCursos = new JComboBox<>();
         panel.add(cbCursos);
 
-        btnAceptar = new JButton("Aceptar");
-        btnCancelar = new JButton("Cancelar");
+        btAceptar = new JButton("Aceptar");
+        btCancelar = new JButton("Cancelar");
 
-        panel.add(btnAceptar);
-        panel.add(btnCancelar);
+        panel.add(btAceptar);
+        panel.add(btCancelar);
 
         add(panel);
 
         // Listeners
-        btnAceptar.addActionListener((ActionEvent e) -> ejecutarAgregar());
-        btnCancelar.addActionListener((ActionEvent e) -> dispose());
+        btAceptar.addActionListener((ActionEvent e) -> ejecutarAgregar());
+        btCancelar.addActionListener((ActionEvent e) -> dispose());
     }
 
     private void cargarCombos() {
@@ -113,21 +107,117 @@ public class AgregarCursoAProgramaInternalFrame extends javax.swing.JInternalFra
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        btAceptar = new javax.swing.JButton();
+        btCancelar = new javax.swing.JButton();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
+        jLabel1.setText("Programa de Formacion:");
+
+        jLabel2.setText("Curso a agregar:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.addActionListener(this::jComboBox2ActionPerformed);
+
+        btAceptar.setText("Aceptar");
+        btAceptar.addActionListener(this::btAceptarActionPerformed);
+
+        btCancelar.setText("Cancelar");
+        btCancelar.addActionListener(this::btCancelarActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 137, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btAceptar)
+                .addGap(18, 18, 18)
+                .addComponent(btCancelar)
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btAceptar)
+                    .addComponent(btCancelar))
+                .addGap(28, 28, 28))
         );
+
+        getAccessibleContext().setAccessibleName("Agrugar Curso a Programa de Formacion");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptarActionPerformed
+        // TODO add your handling code here:
+        String prog = (String) cbProgramas.getSelectedItem();
+        String curso = (String) cbCursos.getSelectedItem();
+
+        if (prog == null || curso == null) {
+        JOptionPane.showMessageDialog(this, "Debe seleccionar un programa y un curso.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+        try {
+        controlPersistencia.agregarCursoAPrograma(prog, curso);
+        JOptionPane.showMessageDialog(this, "Curso agregado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        this.dispose(); // Cierra el JInternalFrame
+        }catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_btAceptarActionPerformed
+
+    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose(); // Simplemente cierra la ventana
+    }//GEN-LAST:event_btCancelarActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAceptar;
+    private javax.swing.JButton btCancelar;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

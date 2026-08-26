@@ -104,24 +104,98 @@ public class PrincipalFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        menuAgregarCursoProg = new javax.swing.JMenuItem();
+        menuConsultaProg = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenuItem2.setText("jMenuItem2");
+
+        jMenuItem3.setText("jMenuItem3");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jMenu1.setText("Registros");
+
+        menuAgregarCursoProg.setText("Agregar Curso a Programa");
+        menuAgregarCursoProg.addActionListener(this::menuAgregarCursoProgActionPerformed);
+        jMenu1.add(menuAgregarCursoProg);
+
+        jMenuBar1.add(jMenu1);
+
+        menuConsultaProg.setText("Consultas");
+
+        jMenuItem5.setText("Consulta Programa de Formacion");
+        jMenuItem5.addActionListener(this::jMenuItem5ActionPerformed);
+        menuConsultaProg.add(jMenuItem5);
+
+        jMenuBar1.add(menuConsultaProg);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(144, 144, 144)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(156, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void menuAgregarCursoProgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgregarCursoProgActionPerformed
+        // TODO add your handling code here:
+        AgregarCursoAProgramaInternalFrame iframe = new AgregarCursoAProgramaInternalFrame(controlPersistencia);
+        desktopPane.add(iframe);
+        iframe.setVisible(true);
+    }//GEN-LAST:event_menuAgregarCursoProgActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        ConsultaProgramaFormacionInternalFrame iframe = new ConsultaProgramaFormacionInternalFrame(controlPersistencia);
+        desktopPane.add(iframe);
+        iframe.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem menuAgregarCursoProg;
+    private javax.swing.JMenu menuConsultaProg;
     // End of variables declaration//GEN-END:variables
 }
