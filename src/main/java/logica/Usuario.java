@@ -2,33 +2,36 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Logica;
+package logica;
+import javax.persistence.Entity;
+import java.io.Serializable;
+import javax.persistence.Id;
+import javax.persistence.Column;
 import java.util.Date;
-/**
- *
- * @author Nicolás
- */
-public class DTUsuario{
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Usuario implements Serializable {
+    @Id
     private String nick;
+    @Column(unique = true, nullable = false)
     private String mail;
     private String nombre;
     private String apellido;
     private Date fechaNacimiento;
     
-    public DTUsuario(){
-        this.setNick(new String());
-        this.setMail(new String());
-        this.setNombre(new String());
-        this.setApellido(new String());
-        this.setFechaNacimiento(new Date());
+    public Usuario(){
+        
     }
     
-    public DTUsuario(String ni, String m, String no, String a, Date fn){
-        this.setNick(ni);
-        this.setMail(m);
-        this.setNombre(no);
-        this.setApellido(a);
-        this.setFechaNacimiento(fn);
+    public Usuario(String ni, String m, String no, String a, Date fn){
+        this.nick = ni;
+        this.mail = m;
+        this.nombre = no;
+        this.apellido = a;
+        this.fechaNacimiento = fn;
     }
     
     public String getNick(){

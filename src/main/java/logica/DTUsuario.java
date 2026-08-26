@@ -2,36 +2,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Logica;
-import javax.persistence.Entity;
-import java.io.Serializable;
-import javax.persistence.Id;
+package logica;
 import java.util.Date;
-
 /**
  *
  * @author Nicolás
  */
-@Entity
-public class Usuario implements Serializable {
-    @Id
+public class DTUsuario{
     private String nick;
-    @Id
     private String mail;
     private String nombre;
     private String apellido;
     private Date fechaNacimiento;
     
-    public Usuario(){
-        
+    public DTUsuario(){
+        this.setNick(new String());
+        this.setMail(new String());
+        this.setNombre(new String());
+        this.setApellido(new String());
+        this.setFechaNacimiento(new Date());
     }
     
-    public Usuario(String ni, String m, String no, String a, Date fn){
-        this.nick = ni;
-        this.mail = m;
-        this.nombre = no;
-        this.apellido = a;
-        this.fechaNacimiento = fn;
+    public DTUsuario(String ni, String m, String no, String a, Date fn){
+        this.setNick(ni);
+        this.setMail(m);
+        this.setNombre(no);
+        this.setApellido(a);
+        this.setFechaNacimiento(fn);
     }
     
     public String getNick(){

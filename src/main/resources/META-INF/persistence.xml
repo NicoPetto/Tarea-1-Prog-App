@@ -5,6 +5,9 @@
     <class>logica.Instituto</class>
     <class>logica.ProgramaFormacion</class>
     <class>logica.Curso</class>
+    <class>logica.Usuario</class>
+    <class>logica.Estudiante</class>
+    <class>logica.Docente</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/edEXT?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

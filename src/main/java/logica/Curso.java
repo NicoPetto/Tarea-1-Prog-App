@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -38,6 +40,10 @@ public class Curso implements Serializable {
 
     @ManyToMany(mappedBy = "cursos")
     private List<ProgramaFormacion> programas;
+    
+    @ManyToOne
+    @JoinColumn(name = "instituto_id")
+    private Instituto instituto;
 
     public Curso() {}
 
