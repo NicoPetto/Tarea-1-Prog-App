@@ -41,6 +41,11 @@ public class Instituto implements Serializable {
     public Instituto(String nombre) {
         this.nombre = nombre;
     }
+    
+    @Override
+    public String toString() {
+        return nombre;
+    }
 
     // Getters y Setters
     public Long getId() { return id; }

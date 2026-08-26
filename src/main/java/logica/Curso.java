@@ -46,10 +46,23 @@ public class Curso implements Serializable {
     private Instituto instituto;
 
     public Curso() {}
+    
+    @Override
+    public String toString() {
+        return nombre;
+    }
 
     // Getters y Setters
     public Long getId() { return id; }
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
+    
+    public Instituto getInstituto() {
+    return instituto;
+}
+
+public void setInstituto(Instituto instituto) {
+    this.instituto = instituto;
+}
     
 }

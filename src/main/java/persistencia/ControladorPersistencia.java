@@ -12,6 +12,7 @@ import javax.persistence.Persistence;
 import logica.Curso;
 import logica.Instituto;
 import logica.ProgramaFormacion;
+import logica.Usuario;
 
 /**
  *
@@ -106,6 +107,92 @@ import logica.ProgramaFormacion;
             em.close();
         }
     }
+    
+    public void guardarUsuario(Usuario usuario) throws Exception {
+    EntityManager em = emf.createEntityManager();
+
+    try {
+        em.getTransaction().begin();
+
+        em.persist(usuario);
+
+        em.getTransaction().commit();
+
+    } catch (Exception e) {
+
+        if (em.getTransaction().isActive()) {
+            em.getTransaction().rollback();
+        }
+
+        throw e;
+
+    } finally {
+        em.close();
+    }
+}
+    
+    public Usuario obtenerUsuario(String nick) {
+    EntityManager em = emf.createEntityManager();
+
+    try {
+
+        return em.createQuery(
+                "SELECT u FROM Usuario u WHERE u.nick = :nick",
+                Usuario.class)
+                .setParameter("nick", nick)
+                .getSingleResult();
+
+    } finally {
+        em.close();
+    }
+}
+    
+    public List<Usuario> obtenerUsuarios() {
+    EntityManager em = emf.createEntityManager();
+
+    try {
+
+        return em.createQuery(
+                "SELECT u FROM Usuario u",
+                Usuario.class)
+                .getResultList();
+
+    } finally {
+        em.close();
+    }
+}
+    
+    public List<Curso> obtenerCursosDeInstituto(Long idInstituto) {
+    EntityManager em = emf.createEntityManager();
+
+    try {
+        return em.createQuery(
+                "SELECT c FROM Curso c WHERE c.instituto.id = :id",
+                Curso.class)
+                .setParameter("id", idInstituto)
+                .getResultList();
+
+    } finally {
+        em.close();
+    }
+}
+    
+    public List<Curso> obtenerTodosLosCursos() {
+
+    EntityManager em = emf.createEntityManager();
+
+    try {
+        return em.createQuery(
+                "SELECT c FROM Curso c",
+                Curso.class)
+                .getResultList();
+
+    } finally {
+        em.close();
+    }
+}
+    
+    
 
     public static class ControladoraPersistencia {
 

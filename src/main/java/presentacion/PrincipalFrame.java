@@ -4,12 +4,7 @@
  */
 package presentacion;
 
-import java.awt.event.ActionEvent;
-import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+
 import javax.swing.SwingUtilities;
 import persistencia.ControladorPersistencia;
 
@@ -22,70 +17,20 @@ public class PrincipalFrame extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PrincipalFrame.class.getName());
 
     // 1. El contenedor virtual donde flotarán los JInternalFrame
-    private JDesktopPane desktopPane;
 
     // 2. La instancia de la lógica/persistencia
     private ControladorPersistencia controlPersistencia;
 
     public PrincipalFrame() {
-        // Inicializar la controladora de persistencia
-        controlPersistencia = new ControladorPersistencia();
-        // Configuración básica de la ventana principal
-        setTitle("Plataforma Educativa - edEXT");
-        setSize(1024, 768);
-        setLocationRelativeTo(null); // Centrar en pantalla
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    initComponents();
 
-        // Crear e integrar el JDesktopPane
-        desktopPane = new JDesktopPane();
-        this.setContentPane(desktopPane);
+    controlPersistencia = new ControladorPersistencia();
 
-        // Construir el menú superior
-        construirMenu();
-    }
+    setTitle("Plataforma Educativa - edEXT");
+    setLocationRelativeTo(null);
+}
 
-    private void construirMenu() {
-        JMenuBar menuBar = new JMenuBar();
-
-        // --- MENÚ REGISTROS ---
-        JMenu menuRegistros = new JMenu("Registros");
-        
-        JMenuItem itemAgregarCursoProg = new JMenuItem("Agregar Curso a Programa");
-        menuRegistros.add(itemAgregarCursoProg);
-
-        // --- MENÚ CONSULTAS ---
-        JMenu menuConsultas = new JMenu("Consultas");
-        
-        JMenuItem itemConsultaProg = new JMenuItem("Consulta de Programa de Formación");
-        menuConsultas.add(itemConsultaProg);
-
-        // Agregar menús a la barra
-        menuBar.add(menuRegistros);
-        menuBar.add(menuConsultas);
-        this.setJMenuBar(menuBar);
-
-        
-        // CONFIGURACIÓN DE EVENTOS (LISTENERS)
-       
-
-        // Acción: Abrir "Agregar Curso a Programa"
-        itemAgregarCursoProg.addActionListener((ActionEvent e) -> {
-            AgregarCursoAProgramaInternalFrame iframe = 
-                new AgregarCursoAProgramaInternalFrame(controlPersistencia);
-            
-            desktopPane.add(iframe); // 1. Agregar al escritorio interno
-            iframe.setVisible(true); // 2. Hacerlo visible
-        });
-
-        // Acción: Abrir "Consulta de Programa de Formación"
-        itemConsultaProg.addActionListener((ActionEvent e) -> {
-            ConsultaProgramaFormacionInternalFrame iframe = 
-                new ConsultaProgramaFormacionInternalFrame(controlPersistencia);
-            
-            desktopPane.add(iframe); // 1. Agregar al escritorio interno
-            iframe.setVisible(true); // 2. Hacerlo visible
-        });
-    }
+ 
 
     // Método Main para iniciar la aplicación
     public static void main(String[] args) {
@@ -107,12 +52,14 @@ public class PrincipalFrame extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jSpinner1 = new javax.swing.JSpinner();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuAgregarCursoProg = new javax.swing.JMenuItem();
         menuConsultaProg = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -126,11 +73,11 @@ public class PrincipalFrame extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 275, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Registros");
@@ -147,6 +94,10 @@ public class PrincipalFrame extends javax.swing.JFrame {
         jMenuItem5.addActionListener(this::jMenuItem5ActionPerformed);
         menuConsultaProg.add(jMenuItem5);
 
+        jMenuItem4.setText("Consulta de Edicion de Curso");
+        jMenuItem4.addActionListener(this::jMenuItem4ActionPerformed);
+        menuConsultaProg.add(jMenuItem4);
+
         jMenuBar1.add(menuConsultaProg);
 
         setJMenuBar(jMenuBar1);
@@ -155,17 +106,11 @@ public class PrincipalFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(156, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1)
         );
 
         pack();
@@ -174,16 +119,25 @@ public class PrincipalFrame extends javax.swing.JFrame {
     private void menuAgregarCursoProgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgregarCursoProgActionPerformed
         // TODO add your handling code here:
         AgregarCursoAProgramaInternalFrame iframe = new AgregarCursoAProgramaInternalFrame(controlPersistencia);
-        desktopPane.add(iframe);
+        jDesktopPane1.add(iframe);
         iframe.setVisible(true);
     }//GEN-LAST:event_menuAgregarCursoProgActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
         ConsultaProgramaFormacionInternalFrame iframe = new ConsultaProgramaFormacionInternalFrame(controlPersistencia);
-        desktopPane.add(iframe);
+        jDesktopPane1.add(iframe);
         iframe.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+
+    ConsultaEdicionDeCursoInternalFrame iframe = new ConsultaEdicionDeCursoInternalFrame(controlPersistencia);
+
+    jDesktopPane1.add(iframe);
+    iframe.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     
 
@@ -194,7 +148,9 @@ public class PrincipalFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JMenuItem menuAgregarCursoProg;
     private javax.swing.JMenu menuConsultaProg;
     // End of variables declaration//GEN-END:variables
