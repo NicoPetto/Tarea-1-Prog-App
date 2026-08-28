@@ -5,13 +5,17 @@
 package logica;
 import java.util.Date;
 import javax.persistence.ManyToOne;
+import javax.persistence.Id;
+import javax.persistence.Entity;
 
 /**
  *
  * @author Nicolás
  */
+@Entity
 public class Inscripcion {
     
+    @Id
     private Date fechaInscripcion;
     
     public Date getFechaInscripcion(){

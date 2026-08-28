@@ -5,13 +5,18 @@
 package logica;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *
  * @author Nicolás
  */
+
+@Entity
 public class EdicionCurso {
     
+    @Id
     private String nombre;
     private Date fechaInicio;
     private Date fechaFin;
