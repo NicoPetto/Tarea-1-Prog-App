@@ -6,6 +6,8 @@ package logica;
 
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import java.util.Set;
 /**
  *
  * @author Nicolás
@@ -21,5 +23,11 @@ public class Docente extends Usuario{
     public Docente(String ni, String m, String no, String a, Date fn){
         super(ni, m, no, a, fn);
     }
+    
+    @ManyToMany
+    private Set<Instituto> institutos;
+    
+    @ManyToMany
+    private Set<Curso> cursos;
     
 }

@@ -5,6 +5,7 @@
 package logica;
 import javax.persistence.Entity;
 import java.util.Date;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -20,5 +21,8 @@ public class Estudiante extends Usuario{
     public Estudiante(String ni, String m, String no, String a, Date fn){
         super(ni, m, no, a, fn);
     }
+    
+    @ManyToOne
+    private Inscripcion inscripcion;
     
 }
