@@ -7,6 +7,8 @@ package logica;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 
 /**
  *
@@ -26,6 +28,10 @@ public class EdicionCurso {
     public EdicionCurso(){
         
     }
+    
+    @ManyToOne
+    @JoinColumn(name = "curso_id")
+    private Curso curso;
     
     public EdicionCurso(String n, Date fi, Date ff, Date fp, int c){
         this.nombre = n;
@@ -70,6 +76,16 @@ public class EdicionCurso {
         this.cupo = cupo;
     }
     
-    
+    public Curso getCurso() {
+    return curso;
+}
+
+    public void setCurso(Curso curso) {
+    this.curso = curso;
+}
+    @Override
+    public String toString() {
+    return nombre;
+}
     
 }

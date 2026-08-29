@@ -6,7 +6,9 @@ package presentacion;
 import java.util.List;
 import logica.Instituto;
 import logica.Curso;
+import logica.EdicionCurso;
 import persistencia.ControladorPersistencia;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -37,17 +39,59 @@ public class ConsultaEdicionDeCursoInternalFrame extends javax.swing.JInternalFr
     private void initComponents() {
 
         list1 = new java.awt.List();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         list1.addActionListener(this::list1ActionPerformed);
+
+        jMenuItem1.setText("jMenuItem1");
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
         setTitle("Consulta de Edicion de Curso");
 
         jLabel2.setText("Instituto:");
 
-        jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
+        jComboBox1.addActionListener(this::jComboBox1MuestraInstitutos);
+
+        jLabel3.setText("Cursos:");
+
+        jComboBox2.addActionListener(this::jComboBox2MuestroCursosDeInstitutos);
+
+        jComboBox3.addActionListener(this::jComboBox3EdicionesDeCurso);
+
+        jLabel4.setText("Ediciones:");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Cupo", "Fecha Inicio", "FechaFin", "Fecha Publicacion"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -57,10 +101,20 @@ public class ConsultaEdicionDeCursoInternalFrame extends javax.swing.JInternalFr
                 .addGap(12, 12, 12)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(294, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,8 +127,18 @@ public class ConsultaEdicionDeCursoInternalFrame extends javax.swing.JInternalFr
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(195, Short.MAX_VALUE))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -90,11 +154,20 @@ public class ConsultaEdicionDeCursoInternalFrame extends javax.swing.JInternalFr
         }
     }
     
+    private void cargarCursosDeInstitutos(Instituto instituto) {
+
+    jComboBox2.removeAllItems();
+
+    for (Curso curso : instituto.getCursos()) {
+        jComboBox2.addItem(curso);
+    }
+}
+    
     private void list1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_list1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_list1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jComboBox1MuestraInstitutos(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1MuestraInstitutos
         // TODO add your handling code here:
 
     Instituto institutoSeleccionado =
@@ -104,20 +177,66 @@ public class ConsultaEdicionDeCursoInternalFrame extends javax.swing.JInternalFr
         return;
     }
 
-    List<Curso> cursos = cp.obtenerTodosLosCursos();
+    jComboBox2.removeAllItems();
+    jComboBox3.removeAllItems();
 
-    list1.removeAll();
-
-    for (Curso curso : cursos) {
-        list1.add(curso.getNombre());
+    for (Curso curso : institutoSeleccionado.getCursos()) {
+        jComboBox2.addItem(curso);
     }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jComboBox1MuestraInstitutos
+
+    private void jComboBox2MuestroCursosDeInstitutos(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2MuestroCursosDeInstitutos
+        // TODO add your handling code here:
+        Curso cursoSeleccionado =
+            (Curso) jComboBox2.getSelectedItem();
+
+    if (cursoSeleccionado == null) {
+        return;
+    }
+
+    jComboBox3.removeAllItems();
+
+    for (EdicionCurso edicion : cursoSeleccionado.getEdiciones()) {
+        jComboBox3.addItem(edicion);
+    }
+    }//GEN-LAST:event_jComboBox2MuestroCursosDeInstitutos
+
+    private void jComboBox3EdicionesDeCurso(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3EdicionesDeCurso
+        // TODO add your handling code here:
+        EdicionCurso edicionSeleccionada =
+            (EdicionCurso) jComboBox3.getSelectedItem();
+
+    if (edicionSeleccionada == null) {
+        return;
+    }
+
+    DefaultTableModel modelo =
+            (DefaultTableModel) jTable1.getModel();
+
+    modelo.setRowCount(0);
+
+    modelo.addRow(new Object[]{
+        edicionSeleccionada.getNombre(),
+        edicionSeleccionada.getCupo(),
+        edicionSeleccionada.getFechaInicio(),
+        edicionSeleccionada.getFechaFin(),
+        edicionSeleccionada.getFechaPublicacion()
+    });
+    }//GEN-LAST:event_jComboBox3EdicionesDeCurso
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Instituto> jComboBox1;
+    private javax.swing.JComboBox<Curso> jComboBox2;
+    private javax.swing.JComboBox<EdicionCurso> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private java.awt.List list1;
     // End of variables declaration//GEN-END:variables
 }

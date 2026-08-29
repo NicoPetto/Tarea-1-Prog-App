@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Table;
+import java.util.HashSet;
+import javax.persistence.CascadeType;
 
 /**
  *
@@ -55,8 +57,8 @@ public class Curso implements Serializable {
     )
     private Set<Curso> previas;
     
-    @OneToMany(mappedBy = "curso")
-    private Set<EdicionCurso> ediciones;
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
+    private Set<EdicionCurso> ediciones = new HashSet<>();
     
 
     public Curso() {}
