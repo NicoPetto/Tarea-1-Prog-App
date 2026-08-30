@@ -1,5 +1,6 @@
 package persistencia;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import javax.persistence.EntityManager;
@@ -29,13 +30,13 @@ public class PruebaJPA {
             // =========================
 
             Instituto instituto1 =
-                    new Instituto("Instituto de Informática");
+                    new Instituto("Instituto de Carlo");
 
             Instituto instituto2 =
-                    new Instituto("Instituto de Ciencias");
+                    new Instituto("Instituto de Nicolas");
 
             Instituto instituto3 =
-                    new Instituto("Instituto de Tecnología");
+                    new Instituto("Pettorossi High School");
 
             em.persist(instituto1);
             em.persist(instituto2);
@@ -47,19 +48,19 @@ public class PruebaJPA {
             // =========================
 
             Curso curso1 = new Curso();
-            curso1.setNombre("Programación Avanzada");
+            curso1.setNombre("Programación de Aplicaciones");
             curso1.setInstituto(instituto1);
 
             Curso curso2 = new Curso();
-            curso2.setNombre("Bases de Datos");
+            curso2.setNombre("Bases de Datos Avanzados");
             curso2.setInstituto(instituto1);
 
             Curso curso3 = new Curso();
-            curso3.setNombre("Redes");
+            curso3.setNombre("Redes Informaticas");
             curso3.setInstituto(instituto2);
 
             Curso curso4 = new Curso();
-            curso4.setNombre("Inteligencia Artificial");
+            curso4.setNombre("Inteligencia Artificial Avanzada");
             curso4.setInstituto(instituto3);
 
             em.persist(curso1);
@@ -71,13 +72,13 @@ public class PruebaJPA {
             // =========================
             // EDICIONES
             // =========================
-
+            
             EdicionCurso edicion1 = new EdicionCurso(
-                    "Programacion Avanzada 2026",
+                    "Edicion del 2026",
+                    new SimpleDateFormat("dd/MM/yyyy").parse("08/03/2026"),
+                    new SimpleDateFormat("dd/MM/yyyy").parse("10/05/2026"),
                     new Date(),
-                    new Date(),
-                    new Date(),
-                    30
+                    12
             );
 
             edicion1.setCurso(curso1);
@@ -85,11 +86,11 @@ public class PruebaJPA {
 
 
             EdicionCurso edicion2 = new EdicionCurso(
-                    "Programacion Avanzada 2027",
+                    "Edicion del 2027",
+                    new SimpleDateFormat("dd/MM/yyyy").parse("10/09/2026"),
+                    new SimpleDateFormat("dd/MM/yyyy").parse("12/11/2026"),
                     new Date(),
-                    new Date(),
-                    new Date(),
-                    25
+                    11
             );
 
             edicion2.setCurso(curso1);
@@ -97,11 +98,11 @@ public class PruebaJPA {
 
 
             EdicionCurso edicion3 = new EdicionCurso(
-                    "Bases de Datos 2026",
+                    "La del 2026",
+                    new SimpleDateFormat("dd/MM/yyyy").parse("25/07/2026"),
+                    new SimpleDateFormat("dd/MM/yyyy").parse("20/09/2027"),
                     new Date(),
-                    new Date(),
-                    new Date(),
-                    20
+                    74
             );
 
             edicion3.setCurso(curso2);
@@ -109,11 +110,11 @@ public class PruebaJPA {
 
 
             EdicionCurso edicion4 = new EdicionCurso(
-                    "Redes 2026",
+                    "Especial 2026",
+                    new SimpleDateFormat("dd/MM/yyyy").parse("09/11/2026"),
+                    new SimpleDateFormat("dd/MM/yyyy").parse("30/12/2028"),
                     new Date(),
-                    new Date(),
-                    new Date(),
-                    35
+                    33
             );
 
             edicion4.setCurso(curso3);

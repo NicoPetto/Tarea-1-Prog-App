@@ -5,7 +5,7 @@
 package presentacion;
 
 
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import persistencia.ControladorPersistencia;
 
 /**
@@ -17,18 +17,60 @@ public class PrincipalFrame extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PrincipalFrame.class.getName());
 
     // 1. El contenedor virtual donde flotarán los JInternalFrame
+    private void abrirInternalFrame(JInternalFrame frame) {
 
+            // Evitar ventanas duplicadas
+        for (JInternalFrame abierto : jDesktopPane1.getAllFrames()) {
+
+            if (abierto.getClass().equals(frame.getClass())) {
+
+                try {
+                    abierto.setSelected(true);
+                    abierto.toFront();
+                } catch (java.beans.PropertyVetoException e) {
+                    e.printStackTrace();
+                }
+
+                return;
+            }
+        }
+
+        // Agregar la ventana
+        jDesktopPane1.add(frame);
+
+        // Ajustar tamaño
+        frame.pack();
+
+        // Centrar
+        int x = (jDesktopPane1.getWidth() - frame.getWidth()) / 2;
+        int y = (jDesktopPane1.getHeight() - frame.getHeight()) / 2;
+
+        frame.setLocation(Math.max(x, 0), Math.max(y, 0));
+
+        frame.setVisible(true);
+
+        try {
+            frame.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+            e.printStackTrace();
+        }
+    }
     // 2. La instancia de la lógica/persistencia
     private ControladorPersistencia controlPersistencia;
 
     public PrincipalFrame() {
-    initComponents();
+        initComponents();
 
-    controlPersistencia = new ControladorPersistencia();
+        controlPersistencia = new ControladorPersistencia();
 
-    setTitle("Plataforma Educativa - edEXT");
-    setLocationRelativeTo(null);
-}
+        setTitle("edEXT - Plataforma Educativa");
+        setLocationRelativeTo(null);
+
+        // Apariencia del escritorio
+        jDesktopPane1.setBackground(new java.awt.Color(245, 247, 250));
+
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+    }
 
  
 
@@ -118,25 +160,20 @@ public class PrincipalFrame extends javax.swing.JFrame {
 
     private void menuAgregarCursoProgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgregarCursoProgActionPerformed
         // TODO add your handling code here:
-        AgregarCursoAProgramaInternalFrame iframe = new AgregarCursoAProgramaInternalFrame(controlPersistencia);
-        jDesktopPane1.add(iframe);
-        iframe.setVisible(true);
+        abrirInternalFrame(new AgregarCursoAProgramaInternalFrame(controlPersistencia));
     }//GEN-LAST:event_menuAgregarCursoProgActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-        ConsultaProgramaFormacionInternalFrame iframe = new ConsultaProgramaFormacionInternalFrame(controlPersistencia);
-        jDesktopPane1.add(iframe);
-        iframe.setVisible(true);
+        abrirInternalFrame(new ConsultaProgramaFormacionInternalFrame(controlPersistencia));
+        
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
 
-    ConsultaEdicionDeCursoInternalFrame iframe = new ConsultaEdicionDeCursoInternalFrame(controlPersistencia);
+        abrirInternalFrame(new ConsultaEdicionDeCursoInternalFrame(controlPersistencia));
 
-    jDesktopPane1.add(iframe);
-    iframe.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     
