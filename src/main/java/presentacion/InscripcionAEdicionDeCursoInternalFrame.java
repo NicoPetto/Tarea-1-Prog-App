@@ -246,13 +246,24 @@ public class InscripcionAEdicionDeCursoInternalFrame extends javax.swing.JIntern
                 EdicionCurso ec = edicionSeleccionada;
                 String msg = "Se va a inscribir al estudiante " + e.getNombre() + " en la edicion " + ec.getNombre() + " del curso " + c.getNombre();
                 
-                int opcion = JOptionPane.showConfirmDialog(
-            this,
-            msg,
-            "Confirmar inscripción",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE);
+                 Object[] opciones = {"Confirmar", "Cancelar"};
                 
+                int opcion = JOptionPane.showOptionDialog(
+                this,
+                msg,
+                "Confirmar inscripción",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opciones,
+                opciones[0]);
+                
+                if (opcion == 0){
+                    //inscribir estudiante
+                    JOptionPane.showMessageDialog(
+                this,
+                "Inscripción realizada correctamente.");
+                }
                 
     }//GEN-LAST:event_jButton2ActionPerformed
 
