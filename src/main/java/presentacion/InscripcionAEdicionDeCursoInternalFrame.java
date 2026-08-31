@@ -20,6 +20,9 @@ public class InscripcionAEdicionDeCursoInternalFrame extends javax.swing.JIntern
     
     private ControladorPersistencia cp;
     
+    private Estudiante estudianteSeleccionado;
+    private EdicionCurso edicionSeleccionada;
+    
     public InscripcionAEdicionDeCursoInternalFrame(ControladorPersistencia cp) {
         initComponents();
         estudianteSeleccionadoTXT.setVisible(false);
@@ -49,6 +52,8 @@ public class InscripcionAEdicionDeCursoInternalFrame extends javax.swing.JIntern
         jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         estudianteSeleccionadoTXT = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jLabel3.setText("jLabel3");
 
@@ -76,7 +81,14 @@ public class InscripcionAEdicionDeCursoInternalFrame extends javax.swing.JIntern
 
         jLabel6.setText("Estudiante: ");
 
-        estudianteSeleccionadoTXT.setText("jLabel7");
+        estudianteSeleccionadoTXT.setText("Estudiante seleccionado");
+
+        jButton2.setBackground(new java.awt.Color(85, 222, 47));
+        jButton2.setText("Aceptar");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
+
+        jButton3.setText("Cancelar");
+        jButton3.addActionListener(this::jButton3ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,6 +115,12 @@ public class InscripcionAEdicionDeCursoInternalFrame extends javax.swing.JIntern
                                 .addComponent(estudianteSeleccionadoTXT)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(26, 26, 26))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +145,11 @@ public class InscripcionAEdicionDeCursoInternalFrame extends javax.swing.JIntern
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(estudianteSeleccionadoTXT))
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addGap(33, 33, 33))
         );
 
         estudianteSeleccionadoTXT.getAccessibleContext().setAccessibleName("");
@@ -174,7 +196,8 @@ public class InscripcionAEdicionDeCursoInternalFrame extends javax.swing.JIntern
 
     for (EdicionCurso edicion : cursoSeleccionado.getEdiciones()) {
         if (edicion.esVigente()) {
-          EdicionVigenteTXT.setText(edicion.getNombre());
+            edicionSeleccionada = edicion;
+            EdicionVigenteTXT.setText(edicion.getNombre());
             break;
     }
 }
@@ -191,41 +214,60 @@ public class InscripcionAEdicionDeCursoInternalFrame extends javax.swing.JIntern
 
         List<Estudiante> estudiantes = cp.obtenerEstudiantes();
 
-    if (estudiantes.isEmpty()) {
-        JOptionPane.showMessageDialog(
+        if (estudiantes.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "No hay estudiantes registrados."
+            );
+            return;
+        }
+
+        Estudiante seleccionado = (Estudiante) JOptionPane.showInputDialog(
             this,
-            "No hay estudiantes registrados."
+            "Seleccione un estudiante:",
+            "Estudiantes",
+            JOptionPane.PLAIN_MESSAGE,
+            null,
+            estudiantes.toArray(),
+            estudiantes.get(0)
         );
-        return;
-    }
-
-    Estudiante seleccionado = (Estudiante) JOptionPane.showInputDialog(
-        this,
-        "Seleccione un estudiante:",
-        "Estudiantes",
-        JOptionPane.PLAIN_MESSAGE,
-        null,
-        estudiantes.toArray(),
-        estudiantes.get(0)
-    );
-
-    if (seleccionado != null) {
-        estudianteSeleccionadoTXT.setText(
-            seleccionado.getNombre()
-        );
-    }
     
-    if (seleccionado != null) {
-    estudianteSeleccionadoTXT.setText(seleccionado.getNombre());
-    estudianteSeleccionadoTXT.setVisible(true);
-    }
+        if (seleccionado != null) {
+            estudianteSeleccionado = seleccionado;
+            estudianteSeleccionadoTXT.setText(seleccionado.getNombre());
+            estudianteSeleccionadoTXT.setVisible(true);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+                // TODO add your handling code here:
+                Estudiante e = estudianteSeleccionado;
+                Curso c = (Curso) jComboBox2.getSelectedItem();
+                EdicionCurso ec = edicionSeleccionada;
+                String msg = "Se va a inscribir al estudiante " + e.getNombre() + " en la edicion " + ec.getNombre() + " del curso " + c.getNombre();
+                
+                int opcion = JOptionPane.showConfirmDialog(
+            this,
+            msg,
+            "Confirmar inscripción",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE);
+                
+                
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField EdicionVigenteTXT;
     private javax.swing.JLabel estudianteSeleccionadoTXT;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<Instituto> jComboBox1;
     private javax.swing.JComboBox<Curso> jComboBox2;
     private javax.swing.JLabel jLabel1;
