@@ -25,4 +25,6 @@ public class Estudiante extends Usuario{
     @ManyToOne
     private Inscripcion inscripcion;
     
+    
+    
 }

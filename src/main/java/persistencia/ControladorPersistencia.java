@@ -13,6 +13,7 @@ import logica.Curso;
 import logica.Instituto;
 import logica.ProgramaFormacion;
 import logica.Usuario;
+import logica.Estudiante;
 
 /**
  *
@@ -148,19 +149,30 @@ import logica.Usuario;
 }
     
     public List<Usuario> obtenerUsuarios() {
-    EntityManager em = emf.createEntityManager();
+        EntityManager em = emf.createEntityManager();
 
-    try {
+        try {
 
-        return em.createQuery(
-                "SELECT u FROM Usuario u",
-                Usuario.class)
-                .getResultList();
+            return em.createQuery(
+                    "SELECT u FROM Usuario u",
+                    Usuario.class)
+                    .getResultList();
 
-    } finally {
-        em.close();
+        } finally {
+            em.close();
+        }
     }
-}
+    
+    public List<Estudiante> obtenerEstudiantes(){
+        EntityManager em = emf.createEntityManager();
+        
+        try {
+            return em.createQuery("SELECT e FROM Estudiante e", Estudiante.class).getResultList();
+        } finally {
+            em.close();
+        }
+        
+    }
     
     public List<Curso> obtenerCursosDeInstituto(Long idInstituto) {
     EntityManager em = emf.createEntityManager();

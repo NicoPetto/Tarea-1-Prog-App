@@ -8,7 +8,6 @@ import logica.Instituto;
 import logica.Curso;
 import logica.EdicionCurso;
 import persistencia.ControladorPersistencia;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,39 +17,12 @@ public class ConsultaEdicionDeCursoInternalFrame extends javax.swing.JInternalFr
 
     private ControladorPersistencia cp;
     
-    private void configurarInterfaz() {
-
-    // Tamaño de la ventana
-    setSize(750, 500);
-    setResizable(true);
-    setClosable(true);
-    setMaximizable(true);
-    setIconifiable(true);
-
-    // Fondo
-    getContentPane().setBackground(new java.awt.Color(245, 247, 250));
-
-    // Labels
-    jLabel2.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
-    jLabel3.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
-    jLabel4.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
-
-    // Combobox
-    jComboBox1.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 14));
-    jComboBox2.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 14));
-    jComboBox3.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 14));
-    
-    }
-    
-    /**
-     * Creates new form ConsultaEdicionDeCursoInternalFrame
-     */
     public ConsultaEdicionDeCursoInternalFrame(ControladorPersistencia cp) {
     initComponents();
 
     this.cp = cp;
 
-    configurarInterfaz();
+    setSize(750, 500);
     cargarInstitutos();
 }
 
@@ -91,6 +63,10 @@ public class ConsultaEdicionDeCursoInternalFrame extends javax.swing.JInternalFr
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
         setTitle("Consulta de Edicion de Curso");
 
         jLabel2.setText("Instituto:");
@@ -223,14 +199,6 @@ public class ConsultaEdicionDeCursoInternalFrame extends javax.swing.JInternalFr
         }
     }
     
-    private void cargarCursosDeInstitutos(Instituto instituto) {
-
-    jComboBox2.removeAllItems();
-
-    for (Curso curso : instituto.getCursos()) {
-        jComboBox2.addItem(curso);
-    }
-}
     
     private void list1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_list1ActionPerformed
         // TODO add your handling code here:

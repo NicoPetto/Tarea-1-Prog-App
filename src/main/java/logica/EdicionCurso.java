@@ -87,5 +87,11 @@ public class EdicionCurso {
     public String toString() {
     return nombre;
 }
-    
+    public boolean esVigente() {
+    Date fechaActual = new Date();
+
+        return fechaActual.after(fechaInicio) &&
+            fechaActual.before(fechaFin);
+        
+    }
 }

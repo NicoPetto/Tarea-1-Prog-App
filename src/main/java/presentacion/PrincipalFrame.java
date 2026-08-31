@@ -99,6 +99,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuAgregarCursoProg = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         menuConsultaProg = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -127,6 +128,10 @@ public class PrincipalFrame extends javax.swing.JFrame {
         menuAgregarCursoProg.setText("Agregar Curso a Programa");
         menuAgregarCursoProg.addActionListener(this::menuAgregarCursoProgActionPerformed);
         jMenu1.add(menuAgregarCursoProg);
+
+        jMenuItem6.setText("Inscripcion a Edicion de Curso");
+        jMenuItem6.addActionListener(this::jMenuItem6ActionPerformed);
+        jMenu1.add(jMenuItem6);
 
         jMenuBar1.add(jMenu1);
 
@@ -176,6 +181,11 @@ public class PrincipalFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        abrirInternalFrame(new InscripcionAEdicionDeCursoInternalFrame(controlPersistencia));
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -187,6 +197,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JMenuItem menuAgregarCursoProg;
     private javax.swing.JMenu menuConsultaProg;
