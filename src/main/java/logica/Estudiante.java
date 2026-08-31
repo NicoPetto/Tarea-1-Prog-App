@@ -5,7 +5,7 @@
 package logica;
 import javax.persistence.Entity;
 import java.util.Date;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -22,7 +22,7 @@ public class Estudiante extends Usuario{
         super(ni, m, no, a, fn);
     }
     
-    @ManyToOne
+    @OneToMany
     private Inscripcion inscripcion;
     
     

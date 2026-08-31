@@ -14,6 +14,7 @@ import logica.Instituto;
 import logica.ProgramaFormacion;
 import logica.Usuario;
 import logica.Estudiante;
+import logica.EdicionCurso;
 
 /**
  *
@@ -203,7 +204,13 @@ import logica.Estudiante;
         em.close();
     }
 }
-    
+    public void inscriboAEdicionCurso(Estudiante e, EdicionCurso ec){
+        EntityManager em = emf.createEntityManager();
+        
+        try {
+            
+        }
+    }
     
 
     public static class ControladoraPersistencia {

@@ -5,6 +5,7 @@
 package logica;
 import java.util.Date;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 
@@ -26,7 +27,7 @@ public class Inscripcion {
         this.fechaInscripcion = fechaInscripcion;
     }
     
-    @ManyToOne
+    @OneToOne
     private EdicionCurso edicion;
     
     @ManyToOne
