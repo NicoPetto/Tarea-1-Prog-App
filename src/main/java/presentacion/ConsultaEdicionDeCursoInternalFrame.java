@@ -6,6 +6,7 @@ package presentacion;
 import java.util.List;
 import logica.Instituto;
 import logica.Curso;
+import logica.EdicionCurso;
 import persistencia.ControladorPersistencia;
 
 /**
@@ -16,14 +17,12 @@ public class ConsultaEdicionDeCursoInternalFrame extends javax.swing.JInternalFr
 
     private ControladorPersistencia cp;
     
-    /**
-     * Creates new form ConsultaEdicionDeCursoInternalFrame
-     */
     public ConsultaEdicionDeCursoInternalFrame(ControladorPersistencia cp) {
     initComponents();
 
     this.cp = cp;
 
+    setSize(750, 500);
     cargarInstitutos();
 }
 
@@ -37,30 +36,112 @@ public class ConsultaEdicionDeCursoInternalFrame extends javax.swing.JInternalFr
     private void initComponents() {
 
         list1 = new java.awt.List();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        nombreTXT = new javax.swing.JTextField();
+        cupoTXT = new javax.swing.JTextField();
+        fechaInicioTXT = new javax.swing.JTextField();
+        fechaFinTXT = new javax.swing.JTextField();
+        fechaPublicacionTXT = new javax.swing.JTextField();
 
         list1.addActionListener(this::list1ActionPerformed);
 
+        jMenuItem1.setText("jMenuItem1");
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
         setTitle("Consulta de Edicion de Curso");
 
         jLabel2.setText("Instituto:");
 
-        jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
+        jComboBox1.addActionListener(this::jComboBox1SeleccionoInstituto);
+
+        jLabel3.setText("Curso:");
+
+        jComboBox2.addActionListener(this::jComboBox2SeleccionoCursoDeInstituto);
+
+        jComboBox3.addActionListener(this::jComboBox3SeleccionoEdicionDeCurso);
+
+        jLabel4.setText("Edición:");
+
+        jLabel5.setText("Nombre: ");
+
+        jLabel6.setText("Cupo: ");
+
+        jLabel7.setText("Fecha Inicio:");
+
+        jLabel8.setText("Fecha Fin:");
+
+        jLabel9.setText("Fecha Publicacion:");
+
+        nombreTXT.setEditable(false);
+        nombreTXT.addActionListener(this::nombreTXTActionPerformed);
+
+        cupoTXT.setEditable(false);
+
+        fechaInicioTXT.setEditable(false);
+
+        fechaFinTXT.setEditable(false);
+
+        fechaPublicacionTXT.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nombreTXT))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cupoTXT))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fechaInicioTXT))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fechaFinTXT))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fechaPublicacionTXT, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,10 +152,38 @@ public class ConsultaEdicionDeCursoInternalFrame extends javax.swing.JInternalFr
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(195, Short.MAX_VALUE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(2, 2, 2)
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombreTXT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(cupoTXT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(fechaInicioTXT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(fechaFinTXT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(fechaPublicacionTXT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(237, 237, 237))
         );
 
         pack();
@@ -90,11 +199,12 @@ public class ConsultaEdicionDeCursoInternalFrame extends javax.swing.JInternalFr
         }
     }
     
+    
     private void list1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_list1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_list1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jComboBox1SeleccionoInstituto(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1SeleccionoInstituto
         // TODO add your handling code here:
 
     Instituto institutoSeleccionado =
@@ -104,20 +214,74 @@ public class ConsultaEdicionDeCursoInternalFrame extends javax.swing.JInternalFr
         return;
     }
 
-    List<Curso> cursos = cp.obtenerTodosLosCursos();
+    jComboBox2.removeAllItems();
+    jComboBox3.removeAllItems();
 
-    list1.removeAll();
-
-    for (Curso curso : cursos) {
-        list1.add(curso.getNombre());
+    for (Curso curso : institutoSeleccionado.getCursos()) {
+        jComboBox2.addItem(curso);
     }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jComboBox1SeleccionoInstituto
+
+    private void jComboBox2SeleccionoCursoDeInstituto(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2SeleccionoCursoDeInstituto
+        // TODO add your handling code here:
+        Curso cursoSeleccionado =
+            (Curso) jComboBox2.getSelectedItem();
+
+    if (cursoSeleccionado == null) {
+        return;
+    }
+
+    jComboBox3.removeAllItems();
+
+    for (EdicionCurso edicion : cursoSeleccionado.getEdiciones()) {
+        jComboBox3.addItem(edicion);
+    }
+    }//GEN-LAST:event_jComboBox2SeleccionoCursoDeInstituto
+
+    private void jComboBox3SeleccionoEdicionDeCurso(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3SeleccionoEdicionDeCurso
+        // TODO add your handling code here:
+       EdicionCurso edicionSeleccionada =
+            (EdicionCurso) jComboBox3.getSelectedItem();
+
+    if (edicionSeleccionada == null) {
+        return;
+    }
+
+    nombreTXT.setText(edicionSeleccionada.getNombre());
+    cupoTXT.setText(String.valueOf(edicionSeleccionada.getCupo()));
+    fechaInicioTXT.setText(edicionSeleccionada.getFechaInicio().toString());
+    fechaFinTXT.setText(edicionSeleccionada.getFechaFin().toString());
+    fechaPublicacionTXT.setText(
+            edicionSeleccionada.getFechaPublicacion().toString()
+    );
+
+    }//GEN-LAST:event_jComboBox3SeleccionoEdicionDeCurso
+
+    private void nombreTXTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreTXTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreTXTActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField cupoTXT;
+    private javax.swing.JTextField fechaFinTXT;
+    private javax.swing.JTextField fechaInicioTXT;
+    private javax.swing.JTextField fechaPublicacionTXT;
     private javax.swing.JComboBox<Instituto> jComboBox1;
+    private javax.swing.JComboBox<Curso> jComboBox2;
+    private javax.swing.JComboBox<EdicionCurso> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private java.awt.List list1;
+    private javax.swing.JTextField nombreTXT;
     // End of variables declaration//GEN-END:variables
 }

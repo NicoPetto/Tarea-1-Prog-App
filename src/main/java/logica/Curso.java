@@ -5,7 +5,7 @@
 package logica;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Table;
+import java.util.HashSet;
+import javax.persistence.CascadeType;
 
 /**
  *
@@ -39,11 +43,23 @@ public class Curso implements Serializable {
     private String url;
 
     @ManyToMany(mappedBy = "cursos")
-    private List<ProgramaFormacion> programas;
+    private Set<ProgramaFormacion> programas;
     
     @ManyToOne
     @JoinColumn(name = "instituto_id")
     private Instituto instituto;
+    
+    @ManyToMany
+    @JoinTable(
+        name = "previas_curso",
+        joinColumns = @JoinColumn(name = "curso_id"),
+        inverseJoinColumns = @JoinColumn(name = "previa_id")
+    )
+    private Set<Curso> previas;
+    
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
+    private Set<EdicionCurso> ediciones = new HashSet<>();
+    
 
     public Curso() {}
     
@@ -57,12 +73,35 @@ public class Curso implements Serializable {
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
     
+    public Set<ProgramaFormacion> getProgramasFormacion() {
+        return programas;
+    }
+    
+    public void setProgramaFormacion(Set<ProgramaFormacion> programas){
+        this.programas = programas;
+    }
+
+    public void setInstituto(Instituto instituto) {
+        this.instituto = instituto;
+    }
+    
     public Instituto getInstituto() {
     return instituto;
-}
+    }
 
-public void setInstituto(Instituto instituto) {
-    this.instituto = instituto;
-}
+    public Set<Curso> getPrevias() {
+        return previas;
+    }
     
+    public void setPrevias(Set<Curso> previas){
+        this.previas = previas;
+    }
+    
+    public Set<EdicionCurso> getEdiciones() {
+        return ediciones;
+    }
+    
+    public void setEdiciones(Set<EdicionCurso> ediciones){
+        this.ediciones = ediciones;
+    }
 }

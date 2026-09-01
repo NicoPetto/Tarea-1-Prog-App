@@ -69,4 +69,9 @@ public class Usuario implements Serializable {
         fechaNacimiento = fn;
     }
     
+    @Override
+    public String toString() {
+        return nick + " - " + nombre + " " + apellido;
+    }
+    
 }

@@ -4,15 +4,19 @@
  */
 package persistencia;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import javax.persistence.EntityTransaction;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import logica.Curso;
+import logica.Inscripcion;
 import logica.Instituto;
 import logica.ProgramaFormacion;
 import logica.Usuario;
+import logica.Estudiante;
+import logica.EdicionCurso;
 
 /**
  *
@@ -21,6 +25,31 @@ import logica.Usuario;
     public class ControladorPersistencia {
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("edEXTPU");
+    
+    public void altaProgramaFormacion(ProgramaFormacion programa) {
+
+    EntityManager em = emf.createEntityManager();
+    EntityTransaction tx = em.getTransaction();
+
+    try {
+        tx.begin();
+
+        em.persist(programa);
+
+        tx.commit();
+
+    } catch (Exception e) {
+
+        if (tx.isActive()) {
+            tx.rollback();
+        }
+
+        throw e;
+
+    } finally {
+        em.close();
+    }
+    }
 
     // Requerimiento: Agregar Curso a Programa de Formación
     public void agregarCursoAPrograma(String nombrePrograma, String nombreCurso) throws Exception {
@@ -197,19 +226,30 @@ import logica.Usuario;
 }
     
     public List<Usuario> obtenerUsuarios() {
-    EntityManager em = emf.createEntityManager();
+        EntityManager em = emf.createEntityManager();
 
-    try {
+        try {
 
-        return em.createQuery(
-                "SELECT u FROM Usuario u",
-                Usuario.class)
-                .getResultList();
+            return em.createQuery(
+                    "SELECT u FROM Usuario u",
+                    Usuario.class)
+                    .getResultList();
 
-    } finally {
-        em.close();
+        } finally {
+            em.close();
+        }
     }
-}
+    
+    public List<Estudiante> obtenerEstudiantes(){
+        EntityManager em = emf.createEntityManager();
+        
+        try {
+            return em.createQuery("SELECT e FROM Estudiante e", Estudiante.class).getResultList();
+        } finally {
+            em.close();
+        }
+        
+    }
     
     public List<Curso> obtenerCursosDeInstituto(Long idInstituto) {
     EntityManager em = emf.createEntityManager();
@@ -245,6 +285,26 @@ import logica.Usuario;
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+    public void inscriboAEdicionCurso(Estudiante e, EdicionCurso ec) {
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            em.getTransaction().begin();
+
+            Inscripcion nueva = new Inscripcion();
+            nueva.setFechaInscripcion(new Date());
+            nueva.setEdicionCurso(ec);
+
+            e.getInscripciones().add(nueva);
+
+            em.persist(nueva);
+
+            em.getTransaction().commit();
+
+        } finally {
+            em.close();
+        }
+    }
     
 
     public static class ControladoraPersistencia {

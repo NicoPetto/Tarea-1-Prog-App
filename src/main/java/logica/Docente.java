@@ -7,6 +7,8 @@ package logica;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import java.util.Set;
 /**
  *
  * @author Nicolás
@@ -30,4 +32,10 @@ public class Docente extends Usuario{
     public List<String> getCursosAsignados() { return cursosAsignados; }
     public List<String> getEdicionesAsignadas() { return edicionesAsignadas; }
     public List<String> getProgramasAsignados() { return programasAsignados; }
+    @ManyToMany
+    private Set<Instituto> institutos;
+    
+    @ManyToMany
+    private Set<Curso> cursos;
+    
 }

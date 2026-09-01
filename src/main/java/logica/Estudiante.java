@@ -4,8 +4,11 @@
  */
 package logica;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -31,6 +34,16 @@ public class Estudiante extends Usuario{
 
     public List<String> getProgramasInscriptos() {
         return programasInscriptos;
+    @OneToMany
+    @JoinColumn(name = "estudiante_nick")
+    private List<Inscripcion> inscripciones = new ArrayList<>();
+    
+    public List<Inscripcion> getInscripciones() {
+        return inscripciones;
+    }
+
+    public void setInscripciones(List<Inscripcion> inscripciones) {
+        this.inscripciones = inscripciones;
     }
     
 }
