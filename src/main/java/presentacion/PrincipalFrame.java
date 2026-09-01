@@ -100,6 +100,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         menuAgregarCursoProg = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         menuConsultaProg = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -132,6 +133,10 @@ public class PrincipalFrame extends javax.swing.JFrame {
         jMenuItem6.setText("Inscripcion a Edicion de Curso");
         jMenuItem6.addActionListener(this::jMenuItem6ActionPerformed);
         jMenu1.add(jMenuItem6);
+
+        jMenuItem7.setText("Alta de Programa de Formacion");
+        jMenuItem7.addActionListener(this::jMenuItem7ActionPerformed);
+        jMenu1.add(jMenuItem7);
 
         jMenuBar1.add(jMenu1);
 
@@ -186,6 +191,11 @@ public class PrincipalFrame extends javax.swing.JFrame {
         abrirInternalFrame(new InscripcionAEdicionDeCursoInternalFrame(controlPersistencia));
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        abrirInternalFrame(new CrearProgramaDeFormacionInternalFrame(controlPersistencia));
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -198,6 +208,7 @@ public class PrincipalFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JMenuItem menuAgregarCursoProg;
     private javax.swing.JMenu menuConsultaProg;

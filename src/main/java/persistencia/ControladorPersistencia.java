@@ -4,12 +4,14 @@
  */
 package persistencia;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import javax.persistence.EntityTransaction;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import logica.Curso;
+import logica.Inscripcion;
 import logica.Instituto;
 import logica.ProgramaFormacion;
 import logica.Usuario;
@@ -23,6 +25,31 @@ import logica.EdicionCurso;
     public class ControladorPersistencia {
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("edEXTPU");
+    
+    public void altaProgramaFormacion(ProgramaFormacion programa) {
+
+    EntityManager em = emf.createEntityManager();
+    EntityTransaction tx = em.getTransaction();
+
+    try {
+        tx.begin();
+
+        em.persist(programa);
+
+        tx.commit();
+
+    } catch (Exception e) {
+
+        if (tx.isActive()) {
+            tx.rollback();
+        }
+
+        throw e;
+
+    } finally {
+        em.close();
+    }
+    }
 
     // Requerimiento: Agregar Curso a Programa de Formación
     public void agregarCursoAPrograma(String nombrePrograma, String nombreCurso) throws Exception {
@@ -204,11 +231,24 @@ import logica.EdicionCurso;
         em.close();
     }
 }
-    public void inscriboAEdicionCurso(Estudiante e, EdicionCurso ec){
+    public void inscriboAEdicionCurso(Estudiante e, EdicionCurso ec) {
         EntityManager em = emf.createEntityManager();
-        
+
         try {
-            
+            em.getTransaction().begin();
+
+            Inscripcion nueva = new Inscripcion();
+            nueva.setFechaInscripcion(new Date());
+            nueva.setEdicionCurso(ec);
+
+            e.getInscripciones().add(nueva);
+
+            em.persist(nueva);
+
+            em.getTransaction().commit();
+
+        } finally {
+            em.close();
         }
     }
     

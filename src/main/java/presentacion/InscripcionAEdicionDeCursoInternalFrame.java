@@ -259,7 +259,7 @@ public class InscripcionAEdicionDeCursoInternalFrame extends javax.swing.JIntern
                 opciones[0]);
                 
                 if (opcion == 0){
-                    //inscribir estudiante
+                    cp.inscriboAEdicionCurso(e, ec);
                     JOptionPane.showMessageDialog(
                 this,
                 "Inscripción realizada correctamente.");
