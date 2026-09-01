@@ -108,6 +108,52 @@ import logica.Usuario;
         }
     }
     
+    
+    // ALTA DE USUARIO
+    public void crearUsuario(Usuario usuario) throws Exception {
+        EntityManager em = emf.createEntityManager();
+        try {
+            // Verificar si el nickname ya existe (opcional si la BD ya lo restringe)
+            Usuario existe = em.find(Usuario.class, usuario.getNick());
+            if (existe != null) {
+                throw new Exception("Ya existe un usuario registrado con el nickname: " + usuario.getNick());
+            }
+
+            em.getTransaction().begin();
+            em.persist(usuario);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
+    
+    
+    
+    
+
+    // MODIFICAR USUARIO
+    public void editarUsuario(Usuario usuario) throws Exception {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(usuario); // merge actualiza los datos del objeto en la BD
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            em.close();
+        }
+    }
+    
+    
     public void guardarUsuario(Usuario usuario) throws Exception {
     EntityManager em = emf.createEntityManager();
 
@@ -142,6 +188,9 @@ import logica.Usuario;
                 .setParameter("nick", nick)
                 .getSingleResult();
 
+    } catch (javax.persistence.NoResultException e) {
+        // Al capturar la excepción, indicamos que el usuario no existe aún (comportamiento esperado)
+        return null; 
     } finally {
         em.close();
     }
@@ -191,6 +240,10 @@ import logica.Usuario;
         em.close();
     }
 }
+
+    private EntityManager getEntityManager() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     
 
