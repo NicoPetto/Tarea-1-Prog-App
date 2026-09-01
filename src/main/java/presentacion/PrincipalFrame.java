@@ -199,6 +199,14 @@ public class PrincipalFrame extends javax.swing.JFrame {
         abrirInternalFrame(new AgregarCursoAProgramaInternalFrame(controlPersistencia));
     }//GEN-LAST:event_menuAgregarCursoProgActionPerformed
 
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {
+    // Lógica para abrir la ventana de Consulta de Edición de Curso
+}
+
+private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {
+    // Lógica para abrir la ventana de Alta de Programa de Formación
+}
+    
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
         abrirInternalFrame(new ConsultaProgramaFormacionInternalFrame(controlPersistencia));

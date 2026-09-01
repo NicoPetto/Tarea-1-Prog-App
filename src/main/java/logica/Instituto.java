@@ -26,8 +26,7 @@ public class Instituto implements Serializable {
 
     private static final long serialVersionUID = 1L;
    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String referencia;
 
     @Column(unique = true, nullable = false)
     private String nombre; // Único en el sistema
@@ -48,7 +47,7 @@ public class Instituto implements Serializable {
     }
 
     // Getters y Setters
-    public Long getId() { return id; }
+    public String getReferencia() { return referencia; }
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
     public List<Curso> getCursos() { return cursos; }

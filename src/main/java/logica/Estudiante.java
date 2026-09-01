@@ -34,6 +34,7 @@ public class Estudiante extends Usuario{
 
     public List<String> getProgramasInscriptos() {
         return programasInscriptos;
+    }
     @OneToMany
     @JoinColumn(name = "estudiante_nick")
     private List<Inscripcion> inscripciones = new ArrayList<>();
