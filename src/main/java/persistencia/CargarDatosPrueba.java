@@ -1,5 +1,6 @@
 package persistencia;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.EntityManager;
@@ -8,233 +9,258 @@ import javax.persistence.Persistence;
 import logica.*;
 
 public class CargarDatosPrueba {
+    
+    
 
-public static void main(String[] args) {
-
-    EntityManagerFactory emf =
-            Persistence.createEntityManagerFactory("edEXTPU");
-
-    EntityManager em = emf.createEntityManager();
-
-    System.out.println("CONEXION EXITOSA");
-
-    try {
-
-        em.getTransaction().begin();
-
-        // =========================
-        // USUARIOS
-        // =========================
-
-        Estudiante EL =
-                new Estudiante(
-                        "eleven11",
-                        "eleven11@gmail.com",
-                        "Eleven",
-                        "Twelve",
-                        new SimpleDateFormat("dd/MM/yyyy").parse("31/12/1971")
-                );
-
-        Estudiante CO =
-                new Estudiante(
-                        "costas",
-                        "gcostas@gmail.com",
-                        "Gerardo",
-                        "Costas",
-                        new SimpleDateFormat("dd/MM/yyyy").parse("15/11/1983")
-                );
-
-        Estudiante RO =
-                new Estudiante(
-                        "roro",
-                        "rcotelo@yahoo.com",
-                        "Rodrigo",
-                        "Cotelo",
-                        new SimpleDateFormat("dd/MM/yyyy").parse("02/08/1975")
-                );
-
-        Estudiante CH =
-                new Estudiante(
-                        "chechi",
-                        "cgarrido@hotmail.com",
-                        "Cecilia",
-                        "Garrido",
-                        new SimpleDateFormat("dd/MM/yyyy").parse("12/09/1987")
-                );
-
-        Estudiante JW =
-                new Estudiante(
-                        "jeffw",
-                        "jwilliams@gmail.com",
-                        "Jeff",
-                        "Williams",
-                        new SimpleDateFormat("dd/MM/yyyy").parse("27/11/1964")
-                );
-
-        Estudiante WE =
-                new Estudiante(
-                        "weiss",
-                        "aweiss@hotmail.com",
-                        "Adrian",
-                        "Weiss",
-                        new SimpleDateFormat("dd/MM/yyyy").parse("23/12/1978")
-                );
-
-        Docente WW =
-                new Docente(
-                        "heisenberg",
-                        "heisenberg@gmail.com",
-                        "Walter",
-                        "White",
-                        new SimpleDateFormat("dd/MM/yyyy").parse("07/03/1956")
-                );
-
-        Docente OK =
-                new Docente(
-                        "benkenobi",
-                        "benKenobi@gmail.com",
-                        "Obi-Wan",
-                        "Kenobi",
-                        new SimpleDateFormat("dd/MM/yyyy").parse("02/04/1914")
-                );
-
-        Docente EW =
-                new Docente(
-                        "waston",
-                        "e.watson@gmail.com",
-                        "Emma",
-                        "Watson",
-                        new SimpleDateFormat("dd/MM/yyyy").parse("15/04/1990")
-                );
-
-        Docente GH =
-                new Docente(
-                        "house",
-                        "greghouse@gmail.com",
-                        "Gregory",
-                        "House",
-                        new SimpleDateFormat("dd/MM/yyyy").parse("15/05/1959")
-                );
-
-        Docente TC =
-                new Docente(
-                        "timmy",
-                        "tim.cook@apple.com",
-                        "Tim",
-                        "Cook",
-                        new SimpleDateFormat("dd/MM/yyyy").parse("01/11/1960")
-                );
-
-        Docente DR =
-                new Docente(
-                        "danny",
-                        "dan.riccio@gmail.com",
-                        "Daniel",
-                        "Riccio",
-                        new SimpleDateFormat("dd/MM/yyyy").parse("05/07/1963")
-                );
-
-        Docente PS =
-                new Docente(
-                        "phils",
-                        "schiller@gmail.com",
-                        "Philip",
-                        "Schiller",
-                        new SimpleDateFormat("dd/MM/yyyy").parse("07/10/1961")
-                );
-
-        Docente BS =
-                new Docente(
-                        "bruces",
-                        "sewell@gmail.com",
-                        "Bruce",
-                        "Sewell",
-                        new SimpleDateFormat("dd/MM/yyyy").parse("03/12/1959")
-                );
-
-        Docente AG =
-                new Docente(
-                        "adri",
-                        "agarcia@gmail.com",
-                        "Adriana",
-                        "García",
-                        new SimpleDateFormat("dd/MM/yyyy").parse("28/07/1978")
-                );
-        
-        // =========================
-        // INSTITUTOS
-        // =========================
-        
-        Instituto IN =
-                    new Instituto("INCO");
-        Instituto IL =
-                    new Instituto("IMERL");
-        Instituto IF =
-                    new Instituto("Física");
-        Instituto IM =
-                    new Instituto("IMPII");
-        Instituto IE =
-                    new Instituto("Eléctrica");
-        Instituto DI =
-                    new Instituto("DISI");
-        
-        // =========================
-        // DATOS ADICIONALES DE DOCENTES
-        // =========================
-        
-        WW.agregoInstituto(IN);
-        OK.agregoInstituto(IN);
-        EW.agregoInstituto(IN);
-        GH.agregoInstituto(IE);
-        TC.agregoInstituto(IL);
-        DR.agregoInstituto(IL);
-        PS.agregoInstituto(IM);
-        BS.agregoInstituto(DI);
-        AG.agregoInstituto(DI);
-        
-        // =========================
-        // CURSOS
-        // =========================
-        
-        Curso C1 = new Curso("Talleres plenarios",
-                "3 semanas",
-                15,
-                1,
-                "01/02/2026", "*Talleres plenarios*: presentados por cuatro reconocidos\n" +
-"matemáticos uruguayos, plantearán diversos tópicos de matemática\n" +
-"en el marco de los cuales se realizarán actividades fomentando la\n" +
-"integración entre\n" +
-"estudiantes, docentes e investigadores.", "WWW.TMU.EDU.UY");
-        Curso C2 = new Curso("", "", , , "", "", "");
-        Curso C3 = new Curso("", "", , , "", "", "");
-        Curso C4 = new Curso("", "", , , "", "", "");
-        Curso C5 = new Curso("", "", , , "", "", "");
-        Curso C6 = new Curso("", "", , , "", "", "");
-        Curso C7 = new Curso("", "", , , "", "", "");
-        Curso C8 = new Curso("", "", , , "", "", "");
-        Curso C9 = new Curso("", "", , , "", "", "");
-        Curso C10 = new Curso("", "", , , "", "", "");
-        
-        //em.persist();
-        
+    public static void main(String[] args) {
 
 
-        em.getTransaction().commit();
 
-        System.out.println("ESTUDIANTES GUARDADOS CORRECTAMENTE");
+        EntityManagerFactory emf =
+                Persistence.createEntityManagerFactory("edEXTPU");
 
-    } catch (Exception e) {
+        EntityManager em = emf.createEntityManager();
 
-        if (em.getTransaction().isActive()) {
-            em.getTransaction().rollback();
+        System.out.println("CONEXION EXITOSA");
+
+        try {
+
+            em.getTransaction().begin();
+
+            // =========================
+            // USUARIOS
+            // =========================
+
+            Estudiante EL =
+                    new Estudiante(
+                            "eleven11",
+                            "eleven11@gmail.com",
+                            "Eleven",
+                            "Twelve",
+                            new SimpleDateFormat("dd/MM/yyyy").parse("31/12/1971")
+                    );
+
+            Estudiante CO =
+                    new Estudiante(
+                            "costas",
+                            "gcostas@gmail.com",
+                            "Gerardo",
+                            "Costas",
+                            new SimpleDateFormat("dd/MM/yyyy").parse("15/11/1983")
+                    );
+
+            Estudiante RO =
+                    new Estudiante(
+                            "roro",
+                            "rcotelo@yahoo.com",
+                            "Rodrigo",
+                            "Cotelo",
+                            new SimpleDateFormat("dd/MM/yyyy").parse("02/08/1975")
+                    );
+
+            Estudiante CH =
+                    new Estudiante(
+                            "chechi",
+                            "cgarrido@hotmail.com",
+                            "Cecilia",
+                            "Garrido",
+                            new SimpleDateFormat("dd/MM/yyyy").parse("12/09/1987")
+                    );
+
+            Estudiante JW =
+                    new Estudiante(
+                            "jeffw",
+                            "jwilliams@gmail.com",
+                            "Jeff",
+                            "Williams",
+                            new SimpleDateFormat("dd/MM/yyyy").parse("27/11/1964")
+                    );
+
+            Estudiante WE =
+                    new Estudiante(
+                            "weiss",
+                            "aweiss@hotmail.com",
+                            "Adrian",
+                            "Weiss",
+                            new SimpleDateFormat("dd/MM/yyyy").parse("23/12/1978")
+                    );
+
+            Docente WW =
+                    new Docente(
+                            "heisenberg",
+                            "heisenberg@gmail.com",
+                            "Walter",
+                            "White",
+                            new SimpleDateFormat("dd/MM/yyyy").parse("07/03/1956")
+                    );
+
+            Docente OK =
+                    new Docente(
+                            "benkenobi",
+                            "benKenobi@gmail.com",
+                            "Obi-Wan",
+                            "Kenobi",
+                            new SimpleDateFormat("dd/MM/yyyy").parse("02/04/1914")
+                    );
+
+            Docente EW =
+                    new Docente(
+                            "waston",
+                            "e.watson@gmail.com",
+                            "Emma",
+                            "Watson",
+                            new SimpleDateFormat("dd/MM/yyyy").parse("15/04/1990")
+                    );
+
+            Docente GH =
+                    new Docente(
+                            "house",
+                            "greghouse@gmail.com",
+                            "Gregory",
+                            "House",
+                            new SimpleDateFormat("dd/MM/yyyy").parse("15/05/1959")
+                    );
+
+            Docente TC =
+                    new Docente(
+                            "timmy",
+                            "tim.cook@apple.com",
+                            "Tim",
+                            "Cook",
+                            new SimpleDateFormat("dd/MM/yyyy").parse("01/11/1960")
+                    );
+
+            Docente DR =
+                    new Docente(
+                            "danny",
+                            "dan.riccio@gmail.com",
+                            "Daniel",
+                            "Riccio",
+                            new SimpleDateFormat("dd/MM/yyyy").parse("05/07/1963")
+                    );
+
+            Docente PS =
+                    new Docente(
+                            "phils",
+                            "schiller@gmail.com",
+                            "Philip",
+                            "Schiller",
+                            new SimpleDateFormat("dd/MM/yyyy").parse("07/10/1961")
+                    );
+
+            Docente BS =
+                    new Docente(
+                            "bruces",
+                            "sewell@gmail.com",
+                            "Bruce",
+                            "Sewell",
+                            new SimpleDateFormat("dd/MM/yyyy").parse("03/12/1959")
+                    );
+
+            Docente AG =
+                    new Docente(
+                            "adri",
+                            "agarcia@gmail.com",
+                            "Adriana",
+                            "García",
+                            new SimpleDateFormat("dd/MM/yyyy").parse("28/07/1978")
+                    );
+
+            // =========================
+            // INSTITUTOS
+            // =========================
+
+            Instituto IN =
+                        new Instituto("INCO");
+            Instituto IL =
+                        new Instituto("IMERL");
+            Instituto IF =
+                        new Instituto("Física");
+            Instituto IM =
+                        new Instituto("IMPII");
+            Instituto IE =
+                        new Instituto("Eléctrica");
+            Instituto DI =
+                        new Instituto("DISI");
+
+            // =========================
+            // DATOS ADICIONALES DE DOCENTES
+            // =========================
+
+            WW.agregoInstituto(IN);
+            OK.agregoInstituto(IN);
+            EW.agregoInstituto(IN);
+            GH.agregoInstituto(IE);
+            TC.agregoInstituto(IL);
+            DR.agregoInstituto(IL);
+            PS.agregoInstituto(IM);
+            BS.agregoInstituto(DI);
+            AG.agregoInstituto(DI);
+
+            // =========================
+            // CURSOS
+            // =========================
+
+            Curso C1 = new Curso("Talleres plenarios",
+                    "3 semanas",
+                    15,
+                    1,
+                    fecha("01-02-2026"), "*Talleres plenarios*: presentados por cuatro reconocidos\n" +
+    "matemáticos uruguayos, plantearán diversos tópicos de matemática\n" +
+    "en el marco de los cuales se realizarán actividades fomentando la\n" +
+    "integración entre\n" +
+    "estudiantes, docentes e investigadores.", "www.tmu.edu.uy");
+            Curso C2 = new Curso("Seminarios de Resolución de\n" +
+"Problemas", "5 semanas", 30, 2, fecha("12-07-2026"), "Seminario, *todos los jueves* en Facultad de Ingeniería a\n" +
+"partir del jueves 25 de Julio, en las áreas en que se desarrollan los\n" +
+"problemas de las Olimpíadas de Matemática.", "www.tmu.edu.uy");
+            Curso C3 = new Curso("Dalavuelta", "10 semanas", 60, 4, fecha("01-02-2026"), "Dalavuelta es un proyecto de extensión que nace en el Instituto de\n" +
+"Ingeniería Mecánica y Producción Industrial (IIMPI) de Fing, que, si\n" +
+"bien inicia su trabajo en el desarrollo de bicicletas accesibles para\n" +
+"personas en situación de discapacidad motriz a partir de bicicletas\n" +
+"abandonadas, se propuso diseñar otras herramientas para fomentar\n" +
+"la accesibilidad.", "https://\n" +
+"eva.fing.edu.uy/\n" +
+"course/view.php?\n" +
+"id=783#section-2");
+            Curso C4 = new Curso("", "", , , fecha(""), "", "");
+            Curso C5 = new Curso("", "", , , fecha(""), "", "");
+            Curso C6 = new Curso("", "", , , fecha(""), "", "");
+            Curso C7 = new Curso("", "", , , fecha(""), "", "");
+            Curso C8 = new Curso("", "", , , fecha(""), "", "");
+            Curso C9 = new Curso("", "", , , fecha(""), "", "");
+            Curso C10 = new Curso("", "", , , fecha(""), "", "");
+
+            //em.persist();
+
+
+
+            em.getTransaction().commit();
+
+            System.out.println("ESTUDIANTES GUARDADOS CORRECTAMENTE");
+
+        } catch (Exception e) {
+
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+
+            e.printStackTrace();
+
+        } finally {
+
+            em.close();
+            emf.close();
         }
-
-        e.printStackTrace();
-
-    } finally {
-
-        em.close();
-        emf.close();
+    }
+    
+    private static Date fecha(String f) {
+    try {
+        return new SimpleDateFormat("dd-MM-yyyy").parse(f);
+    } catch (Exception e) {
+        throw new RuntimeException(e);
     }
 }
+
+
 }
