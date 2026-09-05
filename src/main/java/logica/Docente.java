@@ -35,6 +35,10 @@ public class Docente extends Usuario{
     @ManyToMany
     private Set<Instituto> institutos;
     
+    public void agregoInstituto(Instituto i){
+        institutos.add(i);
+    }
+    
     @ManyToMany
     private Set<Curso> cursos;
     

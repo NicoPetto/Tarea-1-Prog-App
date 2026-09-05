@@ -52,4 +52,5 @@ public class Instituto implements Serializable {
     public void setNombre(String nombre) { this.nombre = nombre; }
     public List<Curso> getCursos() { return cursos; }
     public void setCursos(List<Curso> cursos) { this.cursos = cursos; }
+    public void agregoCurso(Curso c) { cursos.add(c); }
 }

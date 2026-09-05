@@ -6,6 +6,7 @@ package logica;
 
 import java.io.Serializable;
 import java.util.Set;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,6 +41,7 @@ public class Curso implements Serializable {
     private String duracion;
     private int cantidadHoras;
     private int creditos;
+    private Date fechaRegistro;
     private String url;
 
     @ManyToMany(mappedBy = "cursos")
@@ -62,6 +64,16 @@ public class Curso implements Serializable {
     
 
     public Curso() {}
+    
+    public Curso(String n, String d, int h, int c, Date fr, String desc, String u){
+        this.nombre = n;
+        this.duracion = d;
+        this.cantidadHoras = h;
+        this.creditos = c;
+        this.fechaRegistro = fr;
+        this.descripcion = desc;
+        this.url = u;
+    }
     
     @Override
     public String toString() {
